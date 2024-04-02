@@ -1,2 +1,2 @@
-# TSQL-practice
-A repository for holding exercises using TSQL on SQL Server 2022 (Developer Edition) and MS SQL Server Management Studio 20
+# SQL-practice-examples
+A repository for holding exercises using SQL in various forms.
