@@ -39,16 +39,7 @@ WHERE model_year = 2018
 GROUP BY b.brand_name
 ORDER BY b.brand_name;
 /**
-Retrieving the average prices of models made in the year 2018 by brand.
-**/
-SELECT b.brand_name, AVG(p.list_price) AS [Average Price]
-FROM production.products p
-INNER JOIN production.brands b ON b.brand_id = p.brand_id
-WHERE model_year = 2018
-GROUP BY b.brand_name
-ORDER BY b.brand_name;
-/**
-Retrieving the net value of every order.
+Retrieving the net value of every order
 **/
 SELECT order_id AS [Order ID], SUM(quantity * list_price * (1 - discount)) AS [Net Value]
 FROM sales.order_items
