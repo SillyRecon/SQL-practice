@@ -48,3 +48,26 @@ SELECT c.category_id, c.category_name, c.product_count, s.sales
 FROM [Category Counts] c
 INNER JOIN [Category Sales] s ON s.category_id = c.category_id
 ORDER BY c.category_name;
+/**
+Using recursive CTE to get the days in  a week.
+**/
+WITH [Days in a week](n, WEEKDAY) AS
+(
+	SELECT 0, DATENAME(DW, 0) UNION ALL
+	SELECT n + 1, DATENAME(DW, n + 1)
+	FROM [Days in a week]
+	WHERE n < 6
+) SELECT WEEKDAY FROM [Days in a week];
+/**
+Using recursive CTE get the top manager and their subordinate managers.
+**/
+WITH [Organization Structure] AS (
+	SELECT staff_id AS [Staff ID], first_name + ' ' + last_name AS [Full Name], manager_id AS [Manager ID]
+	FROM sales.staffs
+	WHERE manager_id IS NULL
+	UNION ALL
+	SELECT e.staff_id AS [Staff ID], e.first_name + ' ' + e.last_name AS [Full Name], e.manager_id AS [Manager ID]
+	FROM sales.staffs e
+	INNER JOIN [Organization Structure] o ON o.[Staff ID] = e.manager_id
+)
+SELECT * FROM [Organization Structure];
